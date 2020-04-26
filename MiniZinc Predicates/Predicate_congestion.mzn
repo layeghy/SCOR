@@ -1,3 +1,4 @@
+% SCOR Predicate
 
 /*
 Calcultes the the Queuing delay in all links after locating all flows

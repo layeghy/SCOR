@@ -1,3 +1,5 @@
+% SCOR Predicate
+
 /*
 Calculates the minimum BW (BottleNeck) in a path of each flow
 */

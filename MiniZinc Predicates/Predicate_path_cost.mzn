@@ -1,3 +1,5 @@
+% SCOR Predicate
+
 % This file is updated on 08-11-2017 to include the flow demands multiplication in cost and membership
 
 predicate path_cost(

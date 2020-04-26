@@ -1,3 +1,4 @@
+% SCOR Predicate
 
 /*
 Calcultes the links that their capacities are less than limits according to flows

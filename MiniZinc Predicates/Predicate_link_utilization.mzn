@@ -1,3 +1,4 @@
+% SCOR Predicate
 
 /*
 Calcultes the the link utilization percentage after locating all flows

@@ -1,3 +1,4 @@
+% SCOR Predicate
 
 /*
 Limits the all flows in each link to be less than its capacity

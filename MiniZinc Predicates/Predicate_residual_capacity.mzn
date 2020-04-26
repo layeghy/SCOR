@@ -1,3 +1,4 @@
+% SCOR Predicate
 
 /*
 Calcultes the residual capacities of all links after locating all flows
