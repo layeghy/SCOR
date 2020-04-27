@@ -2,7 +2,7 @@
 %%%%%%%%% Calling Predicates  %%%%%%%%%%%%
 
 include "Predicate_residual_capacity.mzn";
-include "Predicate_network_path.mzn";
+include "Predicate_flow_path.mzn";
 
 
 %%%%%%%%%%%%%%%%% Declration  %%%%%%%%%%%%

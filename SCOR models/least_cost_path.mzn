@@ -3,7 +3,7 @@
 
 %%%%%%%%% Calling Predicates  %%%%%%%%%%%%
 
-include "Predicate_network_path.mzn";
+include "Predicate_flow_path.mzn";
 include "Predicate_path_cost.mzn";
 
 

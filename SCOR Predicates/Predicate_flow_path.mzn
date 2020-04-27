@@ -1,6 +1,6 @@
 % SCOR Predicate
 
-predicate network_path(
+predicate flow_path(
                             array[int,int] of var 0..1: Link_Path_Membership,                 % array[1..num_edges,1..nFlows] of var 0..1: x,
                             array[int,int] of int: Link_info,                                     % array[1..num_edges,1..4] of 1..99: Link_info)
                             array[int] of int: Nodes,                                         % aarray[1..n] of 1..n: nodes

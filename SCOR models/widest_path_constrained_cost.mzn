@@ -4,7 +4,7 @@ This model is created on 13-03-2018 to be used in onos
 */
 %%%%%%%%% Calling Predicates  %%%%%%%%%%%%
 
-include "Predicate_network_path.mzn";
+include "Predicate_flow_path.mzn";
 include "Predicate_path_bottleneck.mzn";
 include "Predicate_path_cost.mzn";
 
