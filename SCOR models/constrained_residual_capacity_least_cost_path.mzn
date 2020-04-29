@@ -1,9 +1,9 @@
 
 %%%%%%%%% Calling Predicates  %%%%%%%%%%%%
 
-include "Predicate_flow_path.mzn";
-include "Predicate_path_cost.mzn";
-include "Predicate_residual_capacity.mzn";
+include "../SCOR Predicates/Predicate_flow_path.mzn";
+include "../SCOR Predicates/Predicate_path_cost.mzn";
+include "../SCOR Predicates/Predicate_residual_capacity.mzn";
 
 
 %%%%%%%%%%%%%%%%% Declration  %%%%%%%%%%%%
@@ -53,7 +53,7 @@ array[1..num_links] of var int:Residual_Capacity_Limit;
 %%%%%%%%%%%%%%%% Constraints %%%%%%%%%%%
 
 % Calculate all paths from s to t (apply Flow Conservation Constraint)
-constraint network_path( membership, Link_info, Nodes, s, t);
+constraint flow_path( membership, Link_info, Nodes, s, t);
 
 % Calculate total distance for each possible path 
 constraint path_cost( membership, Link_info, Tcost);

@@ -1,9 +1,9 @@
 
 %%%%%%%%% Calling Predicates  %%%%%%%%%%%%
 
-include "Predicate_residual_capacity.mzn";
-include "Predicate_flow_path.mzn";
-include "Predicate_node_capacity.mzn";
+include "../SCOR Predicates/Predicate_residual_capacity.mzn";
+include "../SCOR Predicates/Predicate_flow_path.mzn";
+include "../SCOR Predicates/Predicate_node_capacity.mzn";
 
 
 %%%%%%%%%%%%%%%%% Declration  %%%%%%%%%%%%
@@ -51,7 +51,7 @@ array[1..num_links] of var 0..c1: Residual;
 %%%%%%%%%%%%%%%% Constraints %%%%%%%%%%%
 
 % Calculate all paths from s to t (apply Flow Conservation Constraint)
-constraint network_path( membership, Link_info, Nodes, s, t);
+constraint flow_path( membership, Link_info, Nodes, s, t);
 
 % Calculate the residual capacity in each link
 constraint residual_capacity( membership, Flow_demands, Link_info, Residual );   

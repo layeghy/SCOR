@@ -4,9 +4,9 @@ This model is created on 13-03-2018 to be used in onos
 */
 %%%%%%%%% Calling Predicates  %%%%%%%%%%%%
 
-include "Predicate_flow_path.mzn";
-include "Predicate_path_bottleneck.mzn";
-include "Predicate_path_cost.mzn";
+include "../SCOR Predicates/Predicate_flow_path.mzn";
+include "../SCOR Predicates/Predicate_path_bottleneck.mzn";
+include "../SCOR Predicates/Predicate_path_cost.mzn";
 
 
 
@@ -52,7 +52,7 @@ array[1..nFlows] of var int: BottleNeck;
 %%%%%%%%%%%%%%%% Constraints %%%%%%%%%%%
 
 % Calculate all paths from s to t (apply Flow Conservation Constraint)
-constraint network_path( membership, Link_info, Nodes, s, t);
+constraint flow_path( membership, Link_info, Nodes, s, t);
 
 % Calculate path bottleneck
 constraint path_bottleneck( membership, Link_info, BottleNeck);

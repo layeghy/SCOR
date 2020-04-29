@@ -1,8 +1,8 @@
 
 %%%%%%%%% Calling Predicates  %%%%%%%%%%%%
 
-include "Predicate_flow_path.mzn";
-include "Predicate_link_utilization.mzn";
+include "../SCOR Predicates/Predicate_flow_path.mzn";
+include "../SCOR Predicates/Predicate_link_utilization.mzn";
 
 
 %%%%%%%%%%%%%%%%% Declration  %%%%%%%%%%%%
@@ -53,7 +53,7 @@ array[1..num_links] of var float: Link_utilization;                 % Link Utili
 %%%%%%%%%%%%%%%% Constraints %%%%%%%%%%%
 
 % Calculate all paths from s to t (apply Flow Conservation Constraint)
-constraint network_path( membership, Link_info, Nodes, s, t);                                                         
+constraint flow_path( membership, Link_info, Nodes, s, t);
 
 % Calculate the link utilization for all link
 constraint link_utilization( membership, Flow_demands, Link_info, Link_utilization );
