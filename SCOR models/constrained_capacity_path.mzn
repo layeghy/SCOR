@@ -13,16 +13,20 @@
 include "../SCOR Predicates/Predicate_flow_path.mzn";
 include "../SCOR Predicates/Predicate_capacity_limit.mzn";
 
+
 %%%%%%%%%%%%%%%%% Declaration  %%%%%%%%%%%%
+% Only for using with the supplied model data files
+% (These three parameters are declared because they are used in the model data files).
+int: c1;
+int: c2;
+int: c3;
+
 % Capacity Constraint
 int: CC = c1;
 
 % link parameters
 int: d1;
 int: d2;
-int: c1;
-int: c2;
-int: c3;
 array[int, int] of int: Link_info;
 int: num_links = max(index_set_1of2(Link_info));
 
