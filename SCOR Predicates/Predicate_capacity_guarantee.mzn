@@ -24,7 +24,7 @@ let {
 }
 in
    (
-     assert(
+    assert(
             max(index_set_1of2(x)) == num_links
             /\
             max(index_set(Res)) == num_links
@@ -36,5 +36,5 @@ in
             residual_capacity( x, Flow_demands, Link_info, Res )
             /\
             forall(i in 1..num_links)(Res[i] >= 0)
-     )
+    )
 );

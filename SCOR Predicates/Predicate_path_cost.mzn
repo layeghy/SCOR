@@ -20,7 +20,7 @@ let {
 }
 in
     (
-       assert(
+      assert(
                 max(index_set_1of2(x)) == num_links                      % memberships must be same as number of links
                 /\
                 lb_array(x) == 0
@@ -30,5 +30,5 @@ in
                 forall(j in 1..nFlows)(
                       TotalCost[j] = sum(i in 1..num_links)(Link_info[i,3] * x[i,j] * Flows[j])
                 )
-       )
+      )
 );

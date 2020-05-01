@@ -20,7 +20,7 @@ let {
 }
 in
    (
-     assert(
+    assert(
             max(index_set_1of2(x)) == num_links
             /\
             max(index_set(Delay)) == num_links
@@ -39,5 +39,5 @@ in
                     else  Delay[i] = 1 / ( Link_info[i,4] - sum(j in 1..nFlows)(Flow_demands[j]*x[i,j]) )
                     endif
             )
-     )
+
 );

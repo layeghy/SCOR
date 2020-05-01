@@ -22,7 +22,7 @@ let {
 }
 in
     (
-      assert(
+     assert(
               max(index_set_1of2(x)) == num_links
               /\
               max(index_set(Res)) == num_links
@@ -37,5 +37,5 @@ in
                              else Link_info[i,4] - sum(j in 1..nFlows)(Flow_demands[j]*x[i,j])
                              endif
               )
-      )
+     )
 );

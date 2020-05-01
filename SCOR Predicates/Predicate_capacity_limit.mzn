@@ -20,7 +20,7 @@ let {
 }
 in
    (
-     assert(
+    assert(
             max(index_set_1of2(x)) == num_links
             /\
             max(index_set(Capacity_limits)) == nFlows
@@ -34,5 +34,5 @@ in
                               if Link_info[i,4] < Limits[j] then membership[i,j] = 0 else true endif
                     )
             )
-     )
+    )
 );

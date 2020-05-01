@@ -20,8 +20,8 @@ let {
       array[1..num_links] of var int: W;
 }
 in
-  (
-    assert(
+    (
+     assert(
             max(index_set_1of2(x)) == num_links                          % memberships must be same as number of links
             /\
             lb_array(x) == 0
@@ -35,5 +35,5 @@ in
                     /\
                     BottleNeck[j] = min(W)
             )
-    )
+     )
 );

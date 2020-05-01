@@ -24,7 +24,7 @@ let {
 }
 in
    (
-     assert(
+    assert(
             max(index_set_1of2(x)) == num_links                          % memberships equal number of links
             /\
             lb_array(x) == 0
@@ -44,5 +44,5 @@ in
                            sum(k in 1..num_links where Link_info[k,2] = i) (x[k,j]) <= 1
                    )
             )
-   )
+    )
 );
