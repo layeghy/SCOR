@@ -68,7 +68,7 @@ constraint node_capacity( membership, Flow_demands, Link_info, Nodes_Capacities 
 solve maximize min(Residual);
 
 
-%%%%%%%%%%%%%  Output %%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%  Formatted Output %%%%%%%%%%%%%%%%%%%
 output [
 if i = 1 then
     "\n\n********************* Flow[\(j)] demand = \(Flow_demands[j]) *********************\n" ++

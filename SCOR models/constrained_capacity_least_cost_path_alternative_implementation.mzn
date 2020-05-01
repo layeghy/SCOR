@@ -70,7 +70,7 @@ constraint BottleNeck[1] <= CC;
 solve minimize Tcost[1];
 
 
-%%%%%%%%%%%%%  Output %%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%  Formatted Output %%%%%%%%%%%%%%%%%%%
 output ["Path:  "] ++ [if fix(membership[i,1]) = 0 then "" else " "++show_int(-7,i) endif |
 i in 1..num_links] ++ ["\n"] ++ ["n1-n2: "] ++
 [if fix(membership[i,1]) = 0 then "" else show_int(4,Link_info[i,1])++"->"++show_int(1,Link_info[i,2]) endif |

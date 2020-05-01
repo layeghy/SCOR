@@ -62,7 +62,7 @@ constraint max(Link_utilization) <= 100;
 solve minimize max(Link_utilization);
 
 
-%%%%%%%%%%%%%  Output %%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%  Formatted Output %%%%%%%%%%%%%%%%%%%
 output [
 if i = 1 then
     "\n\n********************* Flow[\(j)] demand = \(Flow_demands[j]) *********************\n" ++

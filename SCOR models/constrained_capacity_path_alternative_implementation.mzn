@@ -67,7 +67,7 @@ constraint BottleNeck[1] <= CC;
 solve satisfy;
 
 
-%%%%%%%%%%%%%  Output %%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%  Formatted Output %%%%%%%%%%%%%%%%%%%
 % output
 output ["Path:  "] ++ [if fix(membership[i,1]) = 0 then "" else " " ++ show_int(-7,i) endif |
 i in 1..num_links] ++ ["\n"] ++ ["n1-n2: "] ++

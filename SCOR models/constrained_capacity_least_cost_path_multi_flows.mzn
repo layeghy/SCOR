@@ -65,7 +65,7 @@ constraint capacity_limit( membership, Flow_demands, Link_info, Limits);
 solve minimize Tcost[1];
 
 
-%%%%%%%%%%%%%  Output %%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%  Formatted Output %%%%%%%%%%%%%%%%%%%
 output [
 if i = 1 then
     "\n\n********************* Flow[\(j)] demand = \(Flow_demands[j]) *********************\n" ++

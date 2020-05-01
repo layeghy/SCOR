@@ -60,7 +60,7 @@ constraint delay( membership, Flow_demands, Link_info, delay );
 solve minimize sum(delay);
 
 
-%%%%%%%%%%%%%  Output %%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%  Formatted Output %%%%%%%%%%%%%%%%%%%
 output [
 if i = 1 then
     "\n\n********************* Flow[\(j)] demand = \(Flow_demands[j]) *********************\n" ++

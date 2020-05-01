@@ -71,7 +71,7 @@ constraint Tcost[1] <= Limits[1];
 solve maximize BottleNeck[1];
 
 
-%%%%%%%%%%%%%  Output %%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%  Formatted Output %%%%%%%%%%%%%%%%%%%
 output [
 if i = 1 then
     "\n\n********************* Flow[\(j)] demand = \(Flow_demands[j]) *********************\n" ++
