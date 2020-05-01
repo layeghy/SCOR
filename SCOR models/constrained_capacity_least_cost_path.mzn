@@ -15,7 +15,7 @@ include "../SCOR Predicates/Predicate_path_cost.mzn";
 include "../SCOR Predicates/Predicate_capacity_limit.mzn";
 
 
-%%%%%%%%%%%%%%%%% Declration  %%%%%%%%%%%%
+%%%%%%%%%%%%%%%%% Declaration  %%%%%%%%%%%%
 % Only for using with the supplied model data files
 % (These three parameters are declared because they are used in the model data files).
 int: c1;

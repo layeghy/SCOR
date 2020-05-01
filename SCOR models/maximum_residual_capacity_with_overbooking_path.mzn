@@ -72,18 +72,18 @@ solve maximize min(Residual);
 %%%%%%%%%%%%%  Formatted Output %%%%%%%%%%%%%%%%%%%
 output [
 if i = 1 then
-            "\n\n********************* Flow[\(j)] demand = \(Flow_demands[j]) *********************\n" ++
-            "Path [Link no (n1-n2)]:  " ++
-            if fix(membership[i,j]) = 0 then "" else " [ln:"++show_int(-2,i) endif ++
-            if fix(membership[i,j]) = 0 then "" else " ("++show_int(2,Link_info[i,1])++
-            "->"++show_int(-2,Link_info[i,2])++") R:"++show_int(-2,fix(Residual[i]))++"] ==>" endif
+    "\n\n********************* Flow[\(j)] demand = \(Flow_demands[j]) *********************\n" ++
+    "Path [Link no (n1-n2)]:  " ++
+    if fix(membership[i,j]) = 0 then "" else " [ln:"++show_int(-2,i) endif ++
+    if fix(membership[i,j]) = 0 then "" else " ("++show_int(2,Link_info[i,1])++
+    "->"++show_int(-2,Link_info[i,2])++") R:"++show_int(-2,fix(Residual[i]))++"] ==>" endif
 elseif i = num_links then
-            if fix(membership[i,j]) = 0 then "" else " [ln:"++show_int(-2,i) endif ++
-            if fix(membership[i,j]) = 0 then "" else " ("++show_int(2,Link_info[i,1])++
-            "->"++show_int(-2,Link_info[i,2])++") R:"++show_int(-2,fix(Residual[i]))++"] " endif ++ "\n"
+    if fix(membership[i,j]) = 0 then "" else " [ln:"++show_int(-2,i) endif ++
+    if fix(membership[i,j]) = 0 then "" else " ("++show_int(2,Link_info[i,1])++
+    "->"++show_int(-2,Link_info[i,2])++") R:"++show_int(-2,fix(Residual[i]))++"] " endif ++ "\n"
 else
-            if fix(membership[i,j]) = 0 then "" else " [ln:"++show_int(-2,i) endif ++
-            if fix(membership[i,j]) = 0 then "" else " ("++show_int(2,Link_info[i,1])++"->"++
-            show_int(-2,Link_info[i,2])++") R:"++show_int(-2,fix(Residual[i]))++"] ==>" endif
+    if fix(membership[i,j]) = 0 then "" else " [ln:"++show_int(-2,i) endif ++
+    if fix(membership[i,j]) = 0 then "" else " ("++show_int(2,Link_info[i,1])++"->"++
+    show_int(-2,Link_info[i,2])++") R:"++show_int(-2,fix(Residual[i]))++"] ==>" endif
 endif | j in 1..nFlows,i in 1.. num_links];
 

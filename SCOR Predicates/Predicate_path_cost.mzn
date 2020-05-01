@@ -28,7 +28,7 @@ in
                 ub_array(x) == 1,
                 "Error: explain this assert error message.",
                 forall(j in 1..nFlows)(
-                      TotalCost[j] = sum(i in 1..num_links) (Link_info[i,3] * x[i,j] * Flows[j])
+                      TotalCost[j] = sum(i in 1..num_links)(Link_info[i,3] * x[i,j] * Flows[j])
                 )
        )
 );

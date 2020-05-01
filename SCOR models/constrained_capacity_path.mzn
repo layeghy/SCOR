@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % File:      SCOR Model for Constrained Capacity path
-% Objective: Finds the flow paths for multiple concurrent flows, each path has a minimum specified capacity
+% Objective: Finds the flow paths that has a minimum specified capacity
 % Github:    https://github.com/layeghy/SCOR
 % Author:    Siamak Layeghy, Marius Portmann
 % Email:     Siamak.Layeghy@uq.net.au

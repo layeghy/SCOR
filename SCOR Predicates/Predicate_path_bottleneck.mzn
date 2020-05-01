@@ -31,7 +31,7 @@ in
             forall(j in 1..nFlows)(
                     forall(i in 1..num_links)(Width[i] = Link_info[i,4] * x[i,j])
                     /\
-                    forall(i in 1..num_links, where Width[i] !=0)( W[i] = Width[i])
+                    forall(i in 1..num_links where Width[i] !=0)( W[i] = Width[i])
                     /\
                     BottleNeck[j] = min(W)
             )
