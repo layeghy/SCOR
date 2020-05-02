@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% File:      SCOR Predicate for capacity Guarantee
-% Objective: Limits the flows in each link to be less than its capacity
+% File:      SCOR Predicate for capacity constraint
+% Objective: applied the capacity constraint, i.e. limits the flows in each link to be less than its capacity
 % Github:    https://github.com/layeghy/SCOR
 % Author:    Siamak Layeghy, Marius Portmann
 % Email:     Siamak.Layeghy@uq.net.au
@@ -10,7 +10,7 @@
 %% Include items
 include "Predicate_residual_capacity.mzn";
 
-predicate capacity_guarantee(
+predicate capacity_constraint(
           array[int,int] of var 0..1: Link_Path_Membership,              % array[1..num_edges,1..nFlows] of var 0..1: x
           array[int] of int: Flow_demands,                               % array[1..nFlows] of int: Flow_demands,
           array[int,int] of int: Link_info,                              % array[1..num_edges,1..4] of 1..99: Link_info)
