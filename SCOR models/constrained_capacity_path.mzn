@@ -11,7 +11,7 @@
 
 %%%%%%%%% Calling Predicates  %%%%%%%%%%%%
 include "../SCOR Predicates/Predicate_flow_path.mzn";
-include "../SCOR Predicates/Predicate_capacity_limit.mzn";
+include "../SCOR Predicates/Predicate_defined_capacity.mzn";
 
 
 %%%%%%%%%%%%%%%%% Declaration  %%%%%%%%%%%%
@@ -55,7 +55,7 @@ array[1..nFlows] of int: Limits;
 constraint flow_path( membership, Link_info, Nodes, s, t);
 
 % remove links with capacity less than Limits
-constraint capacity_limit( membership, Flow_demands, Link_info, Limits);
+constraint defined_capacity( membership, Flow_demands, Link_info, Limits);
 
 
 %%%%%%%%%%%%%%  Solve  %%%%%%%%%%%%%%%%%

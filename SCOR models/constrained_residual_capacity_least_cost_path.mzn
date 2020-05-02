@@ -55,7 +55,7 @@ array[1..1] of var int: Tcost;
 
 % the residual capacity in each link
 array[1..num_links] of var int  : Residual;  
-array[1..num_links] of var int:Residual_Capacity_Limit;
+array[1..num_links] of var int:Residual_defined_capacity;
 
 
 %%%%%%%%%%%%%%%% Constraints %%%%%%%%%%%
@@ -69,7 +69,7 @@ constraint path_cost( membership, Link_info, Tcost, Flow_demands);
 constraint residual_capacity( membership, Flow_demands, Link_info, Residual );
 
 % Calculate the overbooking value in each link (separately just because it decreases solver time)
-constraint forall(i in 1..num_links)(Residual_Capacity_Limit[i] = RCLR*Link_info[i,4]);                                   
+constraint forall(i in 1..num_links)(Residual_defined_capacity[i] = RCLR*Link_info[i,4]);
 
 % Limit the the total flow in each link to less than its capacity plus the overbooking
 constraint forall(i in 1..num_links)(Residual[i] >= RCLR);

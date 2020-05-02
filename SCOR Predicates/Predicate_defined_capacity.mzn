@@ -7,7 +7,7 @@
 % Date:      08-11-2017
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-predicate capacity_limit(
+predicate defined_capacity(
           array[int,int] of var 0..1: Link_Path_Membership,              % array[1..num_edges,1..nFlows] of var 0..1: x
           array[int] of int: Flow_demands,                               % array[1..nFlows] of int: Flow_demands
           array[int,int] of int: Link_info,                              % array[1..num_links,1..4] of 1..99: Link_info)
@@ -31,7 +31,7 @@ in
             "Error: explain this assert error message.",
             forall(i in 1..num_links)(
                     forall(j in 1..nFlows)(
-                              if Link_info[i,4] < Limits[j] then membership[i,j] = 0 else true endif
+                              if Link_info[i,4] < Capacity_limits[j] then Link_Path_Membership[i,j] = 0 else true endif
                     )
             )
     )
