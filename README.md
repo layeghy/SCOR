@@ -32,6 +32,6 @@ based on the definition of cost, can be used for the modelling of
  - [x] _Minimum Loss Path_
  - [x] _Minimum (static) Delay Path_
  
-routing problems.     
+routing problems    
   
   
