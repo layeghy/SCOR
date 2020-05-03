@@ -8,7 +8,7 @@ SCOR provides an interface for developing **Quality of Service (QoS) routing** a
 <br/>
 
 ---
-#####SCOR Predicates
+##### SCOR Predicates
 SCOR consists of 9 **predicates** (which are similar to functions or methods in procedural programming) as below
   - _Flow path predicate_
   - _Defined Capacity predicate_
@@ -27,7 +27,7 @@ These 9 predicates, which are included in `SCOR Predicates` folder, constitutes 
 <br/>
 
 ---
-#####SCOR Models:
+##### SCOR Models:
 SCOR models which implement various QoS routing problems are included in `SCOR Models` folder. 
 These models are created by combining SCOR predicates and solving for an optimisation or constraint satisfaction.
 While currently 22 files are included in this folder, which model 26 different QoS routing problems, there is no
@@ -66,7 +66,7 @@ The methodology of developing apps in ONOS can be followed via its website.
 
 
 ---
-#####Please notice:
+##### Please notice:
 
 The `Sample Model Data` folder includes several example topologies that can be used to try modelled 
 QoS routing algorithms. However, there is no guarantee that there is a feasible path for each example data file via 
