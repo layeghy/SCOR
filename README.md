@@ -27,9 +27,11 @@ QoS routing algorithm. For instance, The `bandwidth_constrained_least_cost_path.
 
 routing algorithms. Similarly, the `least_cost_path.mzn`, 
 based on the definition of cost, can be used for the modelling of
- - __Least cost path__
+ - __Least Cost Path__
  - __Shortest Path__
- - __Minimum loss path__
- - __Minimum static delay path__
+ - __Minimum Loss Path__
+ - __Minimum (static) Delay Path__
  
 routing problems.     
+  
+  
