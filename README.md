@@ -34,15 +34,15 @@ While currently 22 files are included in this folder, which model 26 different Q
 limitation of models that can be created by combining SCOR predicates. The reason why 22 files model 26
 QoS routing problem is because some of these files can be used for modelling of more than one 
 QoS routing algorithm. For instance, The `bandwidth_constrained_least_cost_path.mzn` file can be used to model
-- [x] _Minimum-Cost Bandwidth-Constrained Path_ 
-- [x] _Bandwidth-Constrained Least-(static) Delay Path_
+- _Minimum-Cost Bandwidth-Constrained Path_ 
+- _Bandwidth-Constrained Least-(static) Delay Path_
 
 routing algorithms. Similarly, the `least_cost_path.mzn`, 
 based on the definition of cost, can be used for the modelling of
- - [x] _Least Cost Path_
- - [x] _Shortest Path_
- - [x] _Minimum Loss Path_
- - [x] _Minimum (static) Delay Path_
+ - _Least Cost Path_
+ - _Shortest Path_
+ - _Minimum Loss Path_
+ - _Minimum (static) Delay Path_
  
 routing problems.
 <br/>
