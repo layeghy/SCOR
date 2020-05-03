@@ -59,7 +59,8 @@ Link_info = array2d(1..48, 1..4,
    16, 15,  d1,  c3    %48
 ]);
 
-Limits = [10,10];
+% uncomment only if used in the model file
+% Limits = [10,10];
 Flow_demands = [10, 20];
 s = [1,1];
 t =[16,16];
