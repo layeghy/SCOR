@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% File:      SCOR Model for minimum total link delay path
-% Objective: Finds the flow paths that has a minimum (total) delay
+% File:      SCOR Model for minimum total (dynamic) link delay path
+% Objective: Finds the flow paths that has a minimum (total dynamic) delay
 % Github:    https://github.com/layeghy/SCOR
 % Author:    Siamak Layeghy, Marius Portmann
 % Email:     Siamak.Layeghy@uq.net.au

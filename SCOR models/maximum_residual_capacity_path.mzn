@@ -61,7 +61,6 @@ constraint forall(i in 1..num_links)(Residual[i] > 0);
 
 
 %%%%%%%%%%%%%%  Solve  %%%%%%%%%%%%%%%%%
-% Solve for Maximum - Residual - Capacity
 solve maximize min(Residual);
 
 

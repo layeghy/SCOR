@@ -39,5 +39,5 @@ in
                     else  Delay[i] = 1 / ( Link_info[i,4] - sum(j in 1..nFlows)(Flow_demands[j]*x[i,j]) )
                     endif
             )
-
+   )
 );

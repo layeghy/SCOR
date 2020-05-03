@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % File:      SCOR Model for constrained cost widest path routing
-% Objective: Finds the flow paths that has a maximum bottleneck bandwidth with a specified cost
+% Objective: This file can be used to model (static) Delay-Constrained Bandwidth-optimised Path routing
 % Github:    https://github.com/layeghy/SCOR
 % Author:    Siamak Layeghy, Marius Portmann
 % Email:     Siamak.Layeghy@uq.net.au

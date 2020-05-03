@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% File:      SCOR Model for minimum (maximum) link delay path
-% Objective: Finds the flow paths that has a minimum (maximum) delay
+% File:      SCOR Model for Constrained (dynamic) delay least cost path
+% Objective: Finds the flow paths that has a specified (dynamic) delay and the least cost
 % Github:    https://github.com/layeghy/SCOR
 % Author:    Siamak Layeghy, Marius Portmann
 % Email:     Siamak.Layeghy@uq.net.au
@@ -11,6 +11,7 @@
 
 %%%%%%%%% Calling Predicates  %%%%%%%%%%%%
 include "../SCOR Predicates/Predicate_flow_path.mzn";
+include "../SCOR Predicates/Predicate_path_cost.mzn";
 include "../SCOR Predicates/Predicate_delay.mzn";
 
 
@@ -21,14 +22,17 @@ int: c1;
 int: c2;
 int: c3;
 
-% Total Delay Limit =  sum(flow_demand /(res_cap)) over all links of path
-float: TDL = 9;
+% Link Delay Limit =  max(flow_demand /(res_cap)) over all links of path
+float: LDL = 10;
 
 % link parameters
 int: d1;
 int: d2;
 array[int, int] of int: Link_info;
 int: num_links = max(index_set_1of2(Link_info));
+
+% capacity of links should be more than these values (used in other programs, here just for unifying) 
+array[1..nFlows] of int: Limits;
 
 % nodes
 array[int] of int: Nodes;
@@ -52,12 +56,18 @@ array[1..num_links] of var float: delay;                 % Link congestion
 % Calculate all paths from s to t (apply Flow Conservation Constraint)
 constraint flow_path( membership, Link_info, Nodes, s, t);
 
+% Calculate total distance for each possible path 
+constraint path_cost( membership, Link_info, Tcost, Flow_demands);
+
 % Calculate the link utilization for all link
 constraint delay( membership, Flow_demands, Link_info, delay );
 
+% constraint to limit link delays
+constraint forall(i in 1..num_links)(delay[i] <= LDL);
+
 
 %%%%%%%%%%%%%%  Solve  %%%%%%%%%%%%%%%%%
-solve minimize max(delay);
+solve minimize Tcost[1];
 
 
 %%%%%%%%%%%%%  Formatted Output %%%%%%%%%%%%%%%%%%%
@@ -68,7 +78,7 @@ if i = 1 then
     if fix(membership[i,j]) = 0 then "" else " [ln:"++show_int(-2,i) endif ++
     if fix(membership[i,j]) = 0 then "" else " ("++show_int(2,Link_info[i,1])++
     "->"++show_int(-2,Link_info[i,2])++") delay:"++show_float(-2,2,fix(delay[i]))++"] ==>" endif
-elseif i = num_links then 
+elseif i = num_links then
     if fix(membership[i,j]) = 0 then "" else " [ln:"++show_int(-2,i) endif ++
     if fix(membership[i,j]) = 0 then "" else " ("++show_int(2,Link_info[i,1])++
     "->"++show_int(-2,Link_info[i,2])++") delay:"++show_float(-2,2,fix(delay[i]))++"] " endif ++ "\n"

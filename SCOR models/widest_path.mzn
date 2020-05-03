@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % File:      SCOR Model for widest path routing
-% Objective: Finds the flow paths that has a maximum bottleneck bandwidth
+% Objective: Finds the flow paths that has a maximum bottleneck bandwidth or maximum bandwidth routing (MBR)
 % Github:    https://github.com/layeghy/SCOR
 % Author:    Siamak Layeghy, Marius Portmann
 % Email:     Siamak.Layeghy@uq.net.au

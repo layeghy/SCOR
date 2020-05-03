@@ -1,6 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% File:      SCOR Model for Constrained link delay path
-% Objective: Finds the flow paths that has a maximum specified (dynamic) delay
+% File:      SCOR Model for Constrained Capacity Least Cost Path Routing
+% Objective: This file can be used to model "Minimum-Cost Bandwidth-Constrained Path",
+% and "Bandwidth-Constrained Least-(static) Delay Path" routing algorithms
 % Github:    https://github.com/layeghy/SCOR
 % Author:    Siamak Layeghy, Marius Portmann
 % Email:     Siamak.Layeghy@uq.net.au
@@ -11,7 +12,8 @@
 
 %%%%%%%%% Calling Predicates  %%%%%%%%%%%%
 include "../SCOR Predicates/Predicate_flow_path.mzn";
-include "../SCOR Predicates/Predicate_delay.mzn";
+include "../SCOR Predicates/Predicate_path_cost.mzn";
+include "../SCOR Predicates/Predicate_defined_capacity.mzn";
 
 
 %%%%%%%%%%%%%%%%% Declaration  %%%%%%%%%%%%
@@ -21,17 +23,11 @@ int: c1;
 int: c2;
 int: c3;
 
-% Link Delay Limit =  max(flow_demand /(res_cap)) over all links of path
-float: LDL = 10;
-
 % link parameters
 int: d1;
 int: d2;
 array[int, int] of int: Link_info;
 int: num_links = max(index_set_1of2(Link_info));
-
-% capacity of links should be more than these values (used in other programs, here just for unifying) 
-array[1..nFlows] of int: Limits;
 
 % nodes
 array[int] of int: Nodes;
@@ -40,31 +36,35 @@ array[int] of int: Nodes;
 array[int] of int: Flow_demands;
 int: nFlows = max(index_set(Flow_demands));
 
-% source nodes 
+% source node 
 array[1..nFlows] of int: s;
 
-% target nodes 
+% target node 
 array[1..nFlows] of int: t;
 
-% edge membership in path
-array[1..num_links,1..nFlows] of var 0..1: membership;
-array[1..num_links] of var float: delay;                 % Link congestion
+% link membership in the path
+array[1..num_links,1..nFlows] of var 0..1: membership;  
+
+% objective function is the path length to be minimized 
+array[1..1] of var int: Tcost;
+
+% objective function is to find paths of links with capacity more than limits 
+array[1..nFlows] of int: Limits;
 
 
 %%%%%%%%%%%%%%%% Constraints %%%%%%%%%%%
 % Calculate all paths from s to t (apply Flow Conservation Constraint)
 constraint flow_path( membership, Link_info, Nodes, s, t);
 
-% Calculate the link utilization for all link
-constraint delay( membership, Flow_demands, Link_info, delay );
+% Calculate total distance for each possible path 
+constraint path_cost( membership, Link_info, Tcost, Flow_demands);
 
-% constraint to limit link delays
-constraint forall(i in 1..num_links)(delay[i] <= LDL);
+% remove links with capacity less than Limits
+constraint defined_capacity( membership, Flow_demands, Link_info, Limits);
 
 
 %%%%%%%%%%%%%%  Solve  %%%%%%%%%%%%%%%%%
-% Solve for constrained Congestion
-solve satisfy;
+solve minimize Tcost[1];
 
 
 %%%%%%%%%%%%%  Formatted Output %%%%%%%%%%%%%%%%%%%
@@ -74,17 +74,15 @@ if i = 1 then
     "Path [Link no (n1-n2)]:  " ++
     if fix(membership[i,j]) = 0 then "" else " [ln:"++show_int(-2,i) endif ++
     if fix(membership[i,j]) = 0 then "" else " ("++show_int(2,Link_info[i,1])++
-    "->"++show_int(-2,Link_info[i,2])++") delay:"++show_float(-2,2,fix(delay[i]))++"] ==>" endif
+    "->"++show_int(-2,Link_info[i,2])++") "++"] ==>" endif
 elseif i = num_links then
     if fix(membership[i,j]) = 0 then "" else " [ln:"++show_int(-2,i) endif ++
     if fix(membership[i,j]) = 0 then "" else " ("++show_int(2,Link_info[i,1])++
-    "->"++show_int(-2,Link_info[i,2])++") delay:"++show_float(-2,2,fix(delay[i]))++"] " endif ++ "\n"
+    "->"++show_int(-2,Link_info[i,2])++") "++"] " endif ++ "\n"
 else
     if fix(membership[i,j]) = 0 then "" else " [ln:"++show_int(-2,i) endif ++
     if fix(membership[i,j]) = 0 then "" else " ("++show_int(2,Link_info[i,1])++
-    "->"++show_int(-2,Link_info[i,2])++") delay:"++show_float(-2,2,fix(delay[i]))++"] ==>" endif
+    "->"++show_int(-2,Link_info[i,2])++") "++"] ==>" endif
 endif | j in 1..nFlows,i in 1.. num_links] ++
-        ["\ntotal delay: \(sum(delay))"];
-
-
+        ["\nTotal cost:    [\(fix(Tcost[1]))]"];
 

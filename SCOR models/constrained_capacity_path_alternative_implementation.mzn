@@ -50,9 +50,6 @@ array[1..num_links,1..nFlows] of var 0..1: membership;
 % objective function is the BottleNeck to be maximized 
 array[1..nFlows] of var int: BottleNeck;
 
-% objective function is to find paths of links with capacity more than limits 
-array[1..nFlows] of int: Limits; 
-
 
 %%%%%%%%%%%%%%%% Constraints %%%%%%%%%%%
 % Calculate all paths from s to t (apply Flow Conservation Constraint)
