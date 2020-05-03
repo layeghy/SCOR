@@ -30,9 +30,6 @@ int: d2;
 array[int, int] of int: Link_info;
 int: num_links = max(index_set_1of2(Link_info));
 
-% capacity of links should be more than these values (used in other programs, here just for unifying) 
-array[1..nFlows] of int: Limits;
-
 % nodes
 array[int] of int: Nodes;
 

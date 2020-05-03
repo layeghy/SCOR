@@ -31,8 +31,8 @@ int: d2;
 array[int, int] of int: Link_info;
 int: num_links = max(index_set_1of2(Link_info));
 
-% capacity of links should be more than these values (used in other programs, here just for unifying) 
-array[1..nFlows] of int: Limits;
+% objective function is the path length to be minimized (Total Cost)
+array[1..nFlows] of var int: Tcost;
 
 % nodes
 array[int] of int: Nodes;
