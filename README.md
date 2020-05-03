@@ -19,6 +19,19 @@ These 9 predicates, which are included in **_SCOR Predicates folder_**, constitu
 SCOR models which implement various QoS routing problems are included in **_SCOR Models folder_**. 
 These models are created by combining SCOR predicates and solving for an optimisation or constraint satisfaction.
 While currently 21 files are included in this folder, which model about 30 different QoS routing problems, there is no
-limitation of models that can be created by combining SCOR predicates.    
+limitation of models that can be created by combining SCOR predicates. The reason why 21 files model about 30
+QoS routing problem is because some of these files can be used for modelling of more than one 
+QoS routing algorithm. For instance, The `bandwidth_constrained_least_cost_path.mzn` file can be used to model
+- __Minimum-Cost Bandwidth-Constrained Path__
+- __Bandwidth-Constrained Least-(static) Delay Path__
+
+routing algorithms. Similarly, the `least_cost_path.mzn`, 
+based on the definition of cost, can be used for the modelling of
+ - __least cost path__
+ - __Shortest Path__
+ - __minimum loss path__
+ - __minimum static delay path__
+ 
+routing problems.     
   
   
