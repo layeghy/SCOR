@@ -1,13 +1,13 @@
+/*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*  File:      SCOR Model for widest path routing
+*  Objective: Finds the flow paths that has a maximum bottleneck bandwidth or maximum bandwidth routing (MBR)
+*  Github:    https://github.com/layeghy/SCOR
+*  Author:    Siamak Layeghy, Marius Portmann
+*  Email:     Siamak.Layeghy@uq.net.au
+*  Date:      08-11-2017
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% File:      SCOR Model for widest path routing
-% Objective: Finds the flow paths that has a maximum bottleneck bandwidth or maximum bandwidth routing (MBR)
-% Github:    https://github.com/layeghy/SCOR
-% Author:    Siamak Layeghy, Marius Portmann
-% Email:     Siamak.Layeghy@uq.net.au
-% Date:      08-11-2017
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Note: If running in MiniZinc IDE, the model data can be opened, and fed to the model via Project Explorer.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*  Note: If running in MiniZinc IDE, the model data can be opened, and fed to the model via Project Explorer.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 
 %%%%%%%%% Calling Predicates  %%%%%%%%%%%%
 include "../SCOR Predicates/Predicate_flow_path.mzn";

@@ -1,14 +1,13 @@
+/*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*  File:      SCOR Model for Constrained Capacity Least Cost Path Routing (multi flow)
+*  Objective: Finds the flow paths with predefined minimum capacity and the least cost
+*  Github:    https://github.com/layeghy/SCOR
+*  Author:    Siamak Layeghy, Marius Portmann
+*  Email:     Siamak.Layeghy@uq.net.au
+*  Date:      08-11-2017
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% File:      SCOR Model for Constrained Capacity Least Cost Path Routing
-% Objective: This file can be used to model "Minimum-Cost Bandwidth-Constrained Path",
-% and "Bandwidth-Constrained Least-(static) Delay Path" routing algorithms
-% Github:    https://github.com/layeghy/SCOR
-% Author:    Siamak Layeghy, Marius Portmann
-% Email:     Siamak.Layeghy@uq.net.au
-% Date:      08-11-2017
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Note: If running in MiniZinc IDE, the model data can be opened, and fed to the model via Project Explorer.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*  Note: If running in MiniZinc IDE, the model data can be opened, and fed to the model via Project Explorer.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 
 %%%%%%%%% Calling Predicates  %%%%%%%%%%%%
 include "../SCOR Predicates/Predicate_flow_path.mzn";
@@ -17,7 +16,6 @@ include "../SCOR Predicates/Predicate_defined_capacity.mzn";
 
 
 %%%%%%%%%%%%%%%%% Declaration  %%%%%%%%%%%%
-% Only for using with the supplied model data files
 % (These three parameters are declared because they are used in the model data files).
 int: c1;
 int: c2;

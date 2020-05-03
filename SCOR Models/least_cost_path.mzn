@@ -1,18 +1,18 @@
+/*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*  File:      SCOR Model for Least Cost Path Routing
+*  Objective: Finds the flow path with minimum cost. Based on the definition of cost, it can be used for the modelling of
+ "least cost path", "Shortest Path", "minimum loss path", and " minimum static delay path" routing algorithms.
+*  Github:    https://github.com/layeghy/SCOR
+*  Author:    Siamak Layeghy, Marius Portmann
+*  Email:     Siamak.Layeghy@uq.net.au
+*  Date:      08-11-201
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% File:      SCOR Model for Bandwidth Constrained (static) Delay Constrained Path Routing
-% Objective: Finds the flow paths with constrained maximum (static) delay and bandwidth
-% Github:    https://github.com/layeghy/SCOR
-% Author:    Siamak Layeghy, Marius Portmann
-% Email:     Siamak.Layeghy@uq.net.au
-% Date:      08-11-2017
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Note: If running in MiniZinc IDE, the model data can be opened, and fed to the model via Project Explorer.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*  Note: If running in MiniZinc IDE, the model data can be opened, and fed to the model via Project Explorer.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 
 %%%%%%%%% Calling Predicates  %%%%%%%%%%%%
 include "../SCOR Predicates/Predicate_flow_path.mzn";
 include "../SCOR Predicates/Predicate_path_cost.mzn";
-include "../SCOR Predicates/Predicate_defined_capacity.mzn";
 
 
 %%%%%%%%%%%%%%%%% Declaration  %%%%%%%%%%%%
@@ -21,9 +21,6 @@ include "../SCOR Predicates/Predicate_defined_capacity.mzn";
 int: c1;
 int: c2;
 int: c3;
-
-% Cost Constraint (can be delay, num of hops, ...)
-int: TC = 10000;
 
 % link parameters
 int: d1;
@@ -47,29 +44,20 @@ array[1..nFlows] of int: t;
 % link membership in the path
 array[1..num_links,1..nFlows] of var 0..1: membership;  
 
-% objective function is the path length to be minimized 
-array[1..1] of var int: Tcost;
-
-% objective function is to find paths of links with capacity more than limits 
-array[1..nFlows] of int: Limits;
+% objective function is the path length to be minimized (Total Cost)
+array[1..nFlows] of var int: Tcost;
 
 
 %%%%%%%%%%%%%%%% Constraints %%%%%%%%%%%
-% Calculate all paths from s to t (apply Flow Conservation Constraint)
+% Finds all paths from s to t (apply Flow Conservation Constraint)
 constraint flow_path( membership, Link_info, Nodes, s, t);
 
-% Calculate total distance for each possible path 
+% Finds total distance for each possible path
 constraint path_cost( membership, Link_info, Tcost, Flow_demands);
-
-% remove links with capacity less than Limits
-constraint defined_capacity( membership, Flow_demands, Link_info, Limits);
-
-% constraining the total cost to TC
-constraint Tcost[1] <= TC;
 
 
 %%%%%%%%%%%%%%  Solve  %%%%%%%%%%%%%%%%%
-solve satisfy;
+solve minimize Tcost[1];
 
 
 %%%%%%%%%%%%%  Formatted Output %%%%%%%%%%%%%%%%%%%
@@ -79,15 +67,15 @@ if i = 1 then
     "Path [Link no (n1-n2)]:  " ++
     if fix(membership[i,j]) = 0 then "" else " [ln:"++show_int(-2,i) endif ++
     if fix(membership[i,j]) = 0 then "" else " ("++show_int(2,Link_info[i,1])++
-    "->"++show_int(-2,Link_info[i,2])++") "++"] ==>" endif
+    "->"++show_int(-2,Link_info[i,2])++") " ++ "] ==>" endif
 elseif i = num_links then
     if fix(membership[i,j]) = 0 then "" else " [ln:"++show_int(-2,i) endif ++
     if fix(membership[i,j]) = 0 then "" else " ("++show_int(2,Link_info[i,1])++
-    "->"++show_int(-2,Link_info[i,2])++") "++"] " endif ++ "\n"
+    "->"++show_int(-2,Link_info[i,2])++") " ++ "] " endif ++ "\n"
 else
     if fix(membership[i,j]) = 0 then "" else " [ln:"++show_int(-2,i) endif ++
     if fix(membership[i,j]) = 0 then "" else " ("++show_int(2,Link_info[i,1])++
-    "->"++show_int(-2,Link_info[i,2])++") "++"] ==>" endif
+    "->"++show_int(-2,Link_info[i,2])++") " ++ "] ==>" endif
 endif | j in 1..nFlows,i in 1.. num_links] ++
-        ["\nTotal cost:    [\(fix(Tcost[1]))]"];
-
+        ["\nTotal cost:    [\(fix(Tcost[1]))]"] ++
+        ["\n"++show(membership)];

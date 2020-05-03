@@ -1,11 +1,11 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% File:      SCOR Predicate for link utilization
-% Objective: Finds the the link utilization percentage after locating all flows
-% Github:    https://github.com/layeghy/SCOR
-% Author:    Siamak Layeghy, Marius Portmann
-% Email:     Siamak.Layeghy@uq.net.au
-% Date:      08-11-2017
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+/*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*  File:      SCOR Predicate for link utilization
+*  Objective: Finds the the link utilization percentage after locating all flows
+*  Github:    https://github.com/layeghy/SCOR
+*  Author:    Siamak Layeghy, Marius Portmann
+*  Email:     Siamak.Layeghy@uq.net.au
+*  Date:      08-11-2017
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 
 predicate link_utilization(
           array[int,int] of var 0..1: Link_Path_Membership,              % array[1..num_edges,1..nFlows] of var 0..1: x

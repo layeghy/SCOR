@@ -1,13 +1,13 @@
+/*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*  File:      SCOR Model for MaxMin Residual Capacity
+*  Objective: Finds the flow paths for multiple concurrent flows in a way that the minimum residual capacity is maximised
+*  Github:    https://github.com/layeghy/SCOR
+*  Author:    Siamak Layeghy, Marius Portmann
+*  Email:     Siamak.Layeghy@uq.net.au
+*  Date:      08-11-2017
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% File:      SCOR Model for MaxMin Residual Capacity
-% Objective: Finds the flow paths for multiple concurrent flows in a way that the minimum residual capacity is maximised
-% Github:    https://github.com/layeghy/SCOR
-% Author:    Siamak Layeghy, Marius Portmann
-% Email:     Siamak.Layeghy@uq.net.au
-% Date:      08-11-2017
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Note: If running in MiniZinc IDE, the model data can be opened, and fed to the model via Project Explorer.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*  Note: If running in MiniZinc IDE, the model data can be opened, and fed to the model via Project Explorer.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 
 %%%%%%%%% Calling Predicates  %%%%%%%%%%%%
 include "../SCOR Predicates/Predicate_residual_capacity.mzn";

@@ -1,13 +1,13 @@
+/*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*  File:      SCOR Model for minimum total (dynamic) link delay path
+*  Objective: Finds the flow paths that has a minimum (total dynamic) delay
+*  Github:    https://github.com/layeghy/SCOR
+*  Author:    Siamak Layeghy, Marius Portmann
+*  Email:     Siamak.Layeghy@uq.net.au
+*  Date:      08-11-2017
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% File:      SCOR Model for minimum (Dynamic) delay path
-% Objective: Finds the flow paths that has a minimum (of maximum dynamic) delay
-% Github:    https://github.com/layeghy/SCOR
-% Author:    Siamak Layeghy, Marius Portmann
-% Email:     Siamak.Layeghy@uq.net.au
-% Date:      08-11-2017
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Note: If running in MiniZinc IDE, the model data can be opened, and fed to the model via Project Explorer.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*  Note: If running in MiniZinc IDE, the model data can be opened, and fed to the model via Project Explorer.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 
 %%%%%%%%% Calling Predicates  %%%%%%%%%%%%
 include "../SCOR Predicates/Predicate_flow_path.mzn";
@@ -45,7 +45,7 @@ array[1..nFlows] of int: t;
 
 % edge membership in path
 array[1..num_links,1..nFlows] of var 0..1: membership;
-array[1..num_links] of var float: delay;                 % Link congestion
+array[1..num_links] of var float: delay;
 
 
 %%%%%%%%%%%%%%%% Constraints %%%%%%%%%%%
@@ -57,7 +57,7 @@ constraint delay( membership, Flow_demands, Link_info, delay );
 
 
 %%%%%%%%%%%%%%  Solve  %%%%%%%%%%%%%%%%%
-solve minimize max(delay);
+solve minimize sum(delay);
 
 
 %%%%%%%%%%%%%  Formatted Output %%%%%%%%%%%%%%%%%%%
@@ -68,7 +68,7 @@ if i = 1 then
     if fix(membership[i,j]) = 0 then "" else " [ln:"++show_int(-2,i) endif ++
     if fix(membership[i,j]) = 0 then "" else " ("++show_int(2,Link_info[i,1])++
     "->"++show_int(-2,Link_info[i,2])++") delay:"++show_float(-2,2,fix(delay[i]))++"] ==>" endif
-elseif i = num_links then 
+elseif i = num_links then
     if fix(membership[i,j]) = 0 then "" else " [ln:"++show_int(-2,i) endif ++
     if fix(membership[i,j]) = 0 then "" else " ("++show_int(2,Link_info[i,1])++
     "->"++show_int(-2,Link_info[i,2])++") delay:"++show_float(-2,2,fix(delay[i]))++"] " endif ++ "\n"
@@ -77,7 +77,7 @@ else
     if fix(membership[i,j]) = 0 then "" else " ("++show_int(2,Link_info[i,1])++
     "->"++show_int(-2,Link_info[i,2])++") delay:"++show_float(-2,2,fix(delay[i]))++"] ==>" endif
 endif | j in 1..nFlows,i in 1.. num_links] ++
-        ["\ntotal delay: \(sum(delay))"];
+        ["\nmaximum delay of the path: \(max(delay)) \n delay sum of the path: \(sum(delay))"];
 
 
 

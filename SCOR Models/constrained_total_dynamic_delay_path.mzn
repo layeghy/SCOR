@@ -1,28 +1,28 @@
+/*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*  File:      SCOR Model for Constrained total delay path
+*  Objective: Finds the flow paths that has a maximum specified (total) delay
+*  Github:    https://github.com/layeghy/SCOR
+*  Author:    Siamak Layeghy, Marius Portmann
+*  Email:     Siamak.Layeghy@uq.net.au
+*  Date:      08-11-2017
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% File:      SCOR Model for Constrained (dynamic) delay path
-% Objective: Finds the flow paths that has a specified (dynamic) delay at most
-% Github:    https://github.com/layeghy/SCOR
-% Author:    Siamak Layeghy, Marius Portmann
-% Email:     Siamak.Layeghy@uq.net.au
-% Date:      08-11-2017
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Note: If running in MiniZinc IDE, the model data can be opened, and fed to the model via Project Explorer.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*  Note: If running in MiniZinc IDE, the model data can be opened, and fed to the model via Project Explorer.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 
 %%%%%%%%% Calling Predicates  %%%%%%%%%%%%
 include "../SCOR Predicates/Predicate_flow_path.mzn";
 include "../SCOR Predicates/Predicate_delay.mzn";
 
 
-%%%%%%%%%%%%%%%%% Declaration  %%%%%%%%%%%%
+%%%%%%%%%%%%%%%%% Declration  %%%%%%%%%%%%
 % Only for using with the supplied model data files
 % (These three parameters are declared because they are used in the model data files).
 int: c1;
 int: c2;
 int: c3;
 
-% Link Delay Limit =  max(flow_demand /(res_cap)) over all links of path
-float: LDL = 10;
+% Total Delay Limit =  sum(flow_demand /(res_cap)) over all links of path
+float: TDL = 1;
 
 % link parameters
 int: d1;
@@ -55,15 +55,14 @@ array[1..num_links] of var float: delay;                 % Link congestion
 % Calculate all paths from s to t (apply Flow Conservation Constraint)
 constraint flow_path( membership, Link_info, Nodes, s, t);
 
-% Calculate the link utilization for all link
+% Calculate the link delay for all links
 constraint delay( membership, Flow_demands, Link_info, delay );
 
-% constraint to limit link delays
-constraint forall(i in 1..num_links)(delay[i] <= LDL);
+% constraint delay of all network to 80% of capacity
+constraint sum(delay) <= TDL;
 
 
 %%%%%%%%%%%%%%  Solve  %%%%%%%%%%%%%%%%%
-% Solve for constrained Congestion
 solve satisfy;
 
 
@@ -75,7 +74,7 @@ if i = 1 then
     if fix(membership[i,j]) = 0 then "" else " [ln:"++show_int(-2,i) endif ++
     if fix(membership[i,j]) = 0 then "" else " ("++show_int(2,Link_info[i,1])++
     "->"++show_int(-2,Link_info[i,2])++") delay:"++show_float(-2,2,fix(delay[i]))++"] ==>" endif
-elseif i = num_links then
+elseif i = num_links then 
     if fix(membership[i,j]) = 0 then "" else " [ln:"++show_int(-2,i) endif ++
     if fix(membership[i,j]) = 0 then "" else " ("++show_int(2,Link_info[i,1])++
     "->"++show_int(-2,Link_info[i,2])++") delay:"++show_float(-2,2,fix(delay[i]))++"] " endif ++ "\n"
@@ -83,8 +82,7 @@ else
     if fix(membership[i,j]) = 0 then "" else " [ln:"++show_int(-2,i) endif ++
     if fix(membership[i,j]) = 0 then "" else " ("++show_int(2,Link_info[i,1])++
     "->"++show_int(-2,Link_info[i,2])++") delay:"++show_float(-2,2,fix(delay[i]))++"] ==>" endif
-endif | j in 1..nFlows,i in 1.. num_links] ++
-        ["\ntotal delay: \(sum(delay))"];
+endif | j in 1..nFlows,i in 1.. num_links] ++  ["\ntotal paths delay: \(sum(delay))"];
 
 
 

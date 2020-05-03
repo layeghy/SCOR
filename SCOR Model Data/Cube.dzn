@@ -6,7 +6,7 @@ c2 = 60;
 c3 = 40;
 Nodes = array1d(1..8,[1, 2, 3, 4, 6, 7, 8, 9]);
 
-Nodes_Capacities = array1d(1..10, [c2, c3, c2, c3, c3, c3, c3, c3, c3, c3]);
+% Nodes_Capacities = array1d(1..10, [c2, c3, c2, c3, c3, c3, c3, c3, c3, c3]);
 
 Link_info = array2d(1..24, 1..4,[
 1, 6, 1, 70, 1, 8, 1, 70, 1, 9, 1, 70, 
@@ -21,7 +21,7 @@ Link_info = array2d(1..24, 1..4,[
 ]);
 %10, 4, 1, 100]);
 Flow_demands = [20,20,20];
-%Limits = [10,10,10];
+Limits = [10,10,10];
 s = [1,1,1];
 t = [3,3,3];
 

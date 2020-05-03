@@ -1,17 +1,17 @@
+/*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*  File:      SCOR Model for Constrained Capacity Least Cost Path Routing (using path_bottleneck predicate)
+*  Objective: Finds the flow paths with predefined minimum capacity and the least cost
+*  Github:    https://github.com/layeghy/SCOR
+*  Author:    Siamak Layeghy, Marius Portmann
+*  Email:     Siamak.Layeghy@uq.net.au
+*  Date:      08-11-2017
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% File:      SCOR Model for Constrained Capacity path (Alternative implementation)
-% Objective: Finds the flow paths that has a minimum specified capacity (Using Bottleneck predicate)
-% Github:    https://github.com/layeghy/SCOR
-% Author:    Siamak Layeghy, Marius Portmann
-% Email:     Siamak.Layeghy@uq.net.au
-% Date:      08-11-2017
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Note: If running in MiniZinc IDE, the model data can be opened, and fed to the model via Project Explorer.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*  Note: If running in MiniZinc IDE, the model data can be opened, and fed to the model via Project Explorer.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 
 %%%%%%%%% Calling Predicates  %%%%%%%%%%%%
-
 include "../SCOR Predicates/Predicate_flow_path.mzn";
+include "../SCOR Predicates/Predicate_path_cost.mzn";
 include "../SCOR Predicates/Predicate_path_bottleneck.mzn";
 
 
@@ -47,6 +47,9 @@ array[1..nFlows] of int: t;
 % link membership in the path
 array[1..num_links,1..nFlows] of var 0..1: membership;  
 
+% objective function is the path length to be minimized 
+array[1..1] of var int: Tcost;
+
 % objective function is the BottleNeck to be maximized 
 array[1..nFlows] of var int: BottleNeck;
 
@@ -55,19 +58,21 @@ array[1..nFlows] of var int: BottleNeck;
 % Calculate all paths from s to t (apply Flow Conservation Constraint)
 constraint flow_path( membership, Link_info, Nodes, s, t);
 
+% Calculate total distance for each possible path 
+constraint path_cost( membership, Link_info, Tcost, Flow_demands);
+
 % Calculate path bottleneck
 constraint path_bottleneck( membership, Link_info, BottleNeck);
 constraint BottleNeck[1] <= CC;
 
 
 %%%%%%%%%%%%%%  Solve  %%%%%%%%%%%%%%%%%
-solve satisfy;
+solve minimize Tcost[1];
 
 
 %%%%%%%%%%%%%  Formatted Output %%%%%%%%%%%%%%%%%%%
-% output
-output ["Path:  "] ++ [if fix(membership[i,1]) = 0 then "" else " " ++ show_int(-7,i) endif |
+output ["Path:  "] ++ [if fix(membership[i,1]) = 0 then "" else " "++show_int(-7,i) endif |
 i in 1..num_links] ++ ["\n"] ++ ["n1-n2: "] ++
 [if fix(membership[i,1]) = 0 then "" else show_int(4,Link_info[i,1])++"->"++show_int(1,Link_info[i,2]) endif |
-i in 1.. num_links] ++ ["\nBottleNeck: \(BottleNeck[1])"];
+i in 1.. num_links] ++ ["\nTotal cost:    [\(fix(Tcost[1]))]"];
 

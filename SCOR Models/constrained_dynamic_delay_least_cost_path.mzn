@@ -1,31 +1,38 @@
+/*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*  File:      SCOR Model for Constrained (dynamic) delay least cost path
+*  Objective: Finds the flow paths that has a specified (dynamic) delay and the least cost
+*  Github:    https://github.com/layeghy/SCOR
+*  Author:    Siamak Layeghy, Marius Portmann
+*  Email:     Siamak.Layeghy@uq.net.au
+*  Date:      08-11-2017
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% File:      SCOR Model for Constrained Capacity Least Cost Path Routing (multi flow)
-% Objective: Finds the flow paths with predefined minimum capacity and the least cost
-% Github:    https://github.com/layeghy/SCOR
-% Author:    Siamak Layeghy, Marius Portmann
-% Email:     Siamak.Layeghy@uq.net.au
-% Date:      08-11-2017
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Note: If running in MiniZinc IDE, the model data can be opened, and fed to the model via Project Explorer.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*  Note: If running in MiniZinc IDE, the model data can be opened, and fed to the model via Project Explorer.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 
 %%%%%%%%% Calling Predicates  %%%%%%%%%%%%
 include "../SCOR Predicates/Predicate_flow_path.mzn";
 include "../SCOR Predicates/Predicate_path_cost.mzn";
-include "../SCOR Predicates/Predicate_defined_capacity.mzn";
+include "../SCOR Predicates/Predicate_delay.mzn";
 
 
 %%%%%%%%%%%%%%%%% Declaration  %%%%%%%%%%%%
+% Only for using with the supplied model data files
 % (These three parameters are declared because they are used in the model data files).
 int: c1;
 int: c2;
 int: c3;
+
+% Link Delay Limit =  max(flow_demand /(res_cap)) over all links of path
+float: LDL = 10;
 
 % link parameters
 int: d1;
 int: d2;
 array[int, int] of int: Link_info;
 int: num_links = max(index_set_1of2(Link_info));
+
+% capacity of links should be more than these values (used in other programs, here just for unifying) 
+array[1..nFlows] of int: Limits;
 
 % nodes
 array[int] of int: Nodes;
@@ -34,20 +41,15 @@ array[int] of int: Nodes;
 array[int] of int: Flow_demands;
 int: nFlows = max(index_set(Flow_demands));
 
-% source node 
+% source nodes 
 array[1..nFlows] of int: s;
 
-% target node 
+% target nodes 
 array[1..nFlows] of int: t;
 
-% link membership in the path
-array[1..num_links,1..nFlows] of var 0..1: membership;  
-
-% objective function is the path length to be minimized 
-array[1..1] of var int: Tcost;
-
-% objective function is to find paths of links with capacity more than limits 
-array[1..nFlows] of int: Limits;
+% edge membership in path
+array[1..num_links,1..nFlows] of var 0..1: membership;
+array[1..num_links] of var float: delay;                 % Link congestion
 
 
 %%%%%%%%%%%%%%%% Constraints %%%%%%%%%%%
@@ -57,8 +59,11 @@ constraint flow_path( membership, Link_info, Nodes, s, t);
 % Calculate total distance for each possible path 
 constraint path_cost( membership, Link_info, Tcost, Flow_demands);
 
-% remove links with capacity less than Limits
-constraint defined_capacity( membership, Flow_demands, Link_info, Limits);
+% Calculate the link utilization for all link
+constraint delay( membership, Flow_demands, Link_info, delay );
+
+% constraint to limit link delays
+constraint forall(i in 1..num_links)(delay[i] <= LDL);
 
 
 %%%%%%%%%%%%%%  Solve  %%%%%%%%%%%%%%%%%
@@ -72,15 +77,17 @@ if i = 1 then
     "Path [Link no (n1-n2)]:  " ++
     if fix(membership[i,j]) = 0 then "" else " [ln:"++show_int(-2,i) endif ++
     if fix(membership[i,j]) = 0 then "" else " ("++show_int(2,Link_info[i,1])++
-    "->"++show_int(-2,Link_info[i,2])++") "++"] ==>" endif
+    "->"++show_int(-2,Link_info[i,2])++") delay:"++show_float(-2,2,fix(delay[i]))++"] ==>" endif
 elseif i = num_links then
     if fix(membership[i,j]) = 0 then "" else " [ln:"++show_int(-2,i) endif ++
     if fix(membership[i,j]) = 0 then "" else " ("++show_int(2,Link_info[i,1])++
-    "->"++show_int(-2,Link_info[i,2])++") "++"] " endif ++ "\n"
+    "->"++show_int(-2,Link_info[i,2])++") delay:"++show_float(-2,2,fix(delay[i]))++"] " endif ++ "\n"
 else
     if fix(membership[i,j]) = 0 then "" else " [ln:"++show_int(-2,i) endif ++
     if fix(membership[i,j]) = 0 then "" else " ("++show_int(2,Link_info[i,1])++
-    "->"++show_int(-2,Link_info[i,2])++") "++"] ==>" endif
+    "->"++show_int(-2,Link_info[i,2])++") delay:"++show_float(-2,2,fix(delay[i]))++"] ==>" endif
 endif | j in 1..nFlows,i in 1.. num_links] ++
-        ["\nTotal cost:    [\(fix(Tcost[1]))]"];
+        ["\ntotal delay: \(sum(delay))"];
+
+
 
