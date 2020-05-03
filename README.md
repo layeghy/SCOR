@@ -46,7 +46,7 @@ these files are only samples to tell the readers how to develop their own exampl
 and use the implemented models.
 
  SCOR accesses the _network services_ via the SCD controller. As such, SCOR needs a
- controller specific module (**SCOR Specific Controller Module (SCCM)**) that should be implemented for each controller separately.
+ controller specific module, **SCOR Specific Controller Module (SCCM)**, that should be implemented for each controller separately.
  However, it is done once, and all the up coming QoS routing algorithms modelled in that 
  controller in SCOR can use the implemented SCCM for that controller. 
 The `SCCM [Java]` folder provides the **SCCM** implementation for the **ONOS** SDN controller. 
