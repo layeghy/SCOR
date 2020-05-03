@@ -1,4 +1,4 @@
-# SCOR
+# Software-driven Constraint Optimal Routing (SCOR)
 **Software-driven Constraint Optimal Routing (SCOR)** is a northbound interface for Software Defined Networking (SDN), which can be used with any SDN controller.
 This northbound interface is developed based on the **Constraint Programming** and is implemented in **MiniZinc** constraint modelling language.
 SCOR provides an interface for developing **Quality of Service (QoS) routing** applications in SDN such as minimum cost path routing, maximum bandwidth path routing, maximum residual capacity routing, constrained bandwidth minimum delay routing, etc.
