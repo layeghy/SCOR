@@ -8,7 +8,7 @@ SCOR provides an interface for developing **Quality of Service (QoS) routing** a
 <br/>
 
 ---
-#####SCOR Predicates
+####SCOR Predicates
 SCOR consists of 9 **predicates** (which are similar to functions or methods in procedural programming) as below
   - _Flow path predicate_
   - _Defined Capacity predicate_
