@@ -14,9 +14,9 @@ SCOR consists of 9 **predicates** (which are similar to functions or methods in 
   - _Link Utilisation predicate_
   - _Node Capacity predicate_
   
-These 9 predicates, which are included in `SCOR Predicates folder`, constitutes the building blocks of the SCOR interface. Each of these predicates models a constraint in networking except the first one,  the flow path predicate, which defines flow/network path.
+These 9 predicates, which are included in `SCOR Predicates` folder, constitutes the building blocks of the SCOR interface. Each of these predicates models a constraint in networking except the first one,  the flow path predicate, which defines flow/network path.
 
-SCOR models which implement various QoS routing problems are included in `SCOR Models folder`. 
+SCOR models which implement various QoS routing problems are included in `SCOR Models` folder. 
 These models are created by combining SCOR predicates and solving for an optimisation or constraint satisfaction.
 While currently 21 files are included in this folder, which model 25 different QoS routing problems, there is no
 limitation of models that can be created by combining SCOR predicates. The reason why 21 files model 25
@@ -32,6 +32,26 @@ based on the definition of cost, can be used for the modelling of
  - [x] _Minimum Loss Path_
  - [x] _Minimum (static) Delay Path_
  
-routing problems    
+routing problems.
+
+The `Sample Model Data` folder includes several example topologies that can be used to try modelled 
+QoS routing algorithms. However, there is no guarantee that there is a feasible path for each example data file via 
+each QoS routing model. For instance, the `Cube.dzn` topology (example) file is designed to illustrate
+the functionality of `wireless_maximum_residual_capacity_path.mzn` model, and its 
+functionality has not been checked for other models. The `Grid4.dzn` is tested with a few
+models including, `least_cost_path.mzn`, `widest_path.mzn`, `maximum_residual_capacity_path.mzn`, and 
+`minmax_link_utilization_path.mzn`. Some of these files such as `Grid4.dzn` are 
+written in parametric format to allow easily change the link parameters. In any case, 
+these files are only samples to tell the readers how to develop their own example topologies
+and use the implemented models.
+
+ SCOR accesses the _network services_ via the SCD controller. As such, SCOR needs a
+ controller specific module (**SCOR Specific Controller Module (SCCM)**) that should be implemented for each controller separately.
+ However, it is done once, and all the up coming QoS routing algorithms modelled in that 
+ controller in SCOR can use the implemented SCCM for that controller. 
+The `SCCM [Java]` folder provides the **SCCM** implementation for the **ONOS** SDN controller. 
+It consists of 3 files that constitute the source code for an app in ONOS. 
+The methodology of developing apps in ONOS can be followed via its website.   
+         
   
   
