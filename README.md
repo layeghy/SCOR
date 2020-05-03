@@ -14,12 +14,12 @@ SCOR consists of 9 **predicates** (which are similar to functions or methods in 
   - _Link Utilisation predicate_
   - _Node Capacity predicate_
   
-These 9 predicates, which are included in **_SCOR Predicates folder_**, constitutes the building blocks of the SCOR interface. Each of these predicates models a constraint in networking except the first one,  the flow path predicate, which defines flow/network path.
+These 9 predicates, which are included in `SCOR Predicates folder`, constitutes the building blocks of the SCOR interface. Each of these predicates models a constraint in networking except the first one,  the flow path predicate, which defines flow/network path.
 
-SCOR models which implement various QoS routing problems are included in **_SCOR Models folder_**. 
+SCOR models which implement various QoS routing problems are included in `SCOR Models folder`. 
 These models are created by combining SCOR predicates and solving for an optimisation or constraint satisfaction.
-While currently 21 files are included in this folder, which model about 30 different QoS routing problems, there is no
-limitation of models that can be created by combining SCOR predicates. The reason why 21 files model about 30
+While currently 21 files are included in this folder, which model 25 different QoS routing problems, there is no
+limitation of models that can be created by combining SCOR predicates. The reason why 21 files model 25
 QoS routing problem is because some of these files can be used for modelling of more than one 
 QoS routing algorithm. For instance, The `bandwidth_constrained_least_cost_path.mzn` file can be used to model
 - [x] _Minimum-Cost Bandwidth-Constrained Path_ 
