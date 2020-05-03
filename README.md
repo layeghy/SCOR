@@ -45,11 +45,11 @@ written in parametric format to allow easily change the link parameters. In any 
 these files are only samples to tell the readers how to develop their own example topologies
 and use the implemented models.
 
- SCOR accesses the _network services_ via the SCD controller. As such, SCOR needs a
+ SCOR accesses the _network services_ via the SDN controller. As such, it needs a
  controller specific module, **SCOR Specific Controller Module (SCCM)**, that should be implemented for each controller separately.
- However, it is done once, and all the up coming QoS routing algorithms modelled in that 
- controller in SCOR can use the implemented SCCM for that controller. 
-The `SCCM [Java]` folder provides the **SCCM** implementation for the **ONOS** SDN controller. 
+ However, it is done only once, and all the up coming QoS routing algorithms modelled in that 
+ controller, in SCOR, can use the implemented SCCM for that controller. 
+The `SCCM [ONOS]` folder provides the **SCCM** implementation for the **ONOS** SDN controller. 
 It consists of 3 files that constitute the source code for an app in ONOS. 
 The methodology of developing apps in ONOS can be followed via its website.   
          
