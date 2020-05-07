@@ -2,7 +2,7 @@
 *  File:      SCOR Model for minimum (Dynamic) delay path
 *  Objective: Finds the flow paths that has a minimum (of maximum dynamic) delay
 *  Github:    https://github.com/layeghy/SCOR
-*  Author:    Siamak Layeghy, Marius Portmann
+*  Author:    Siamak Layeghy
 *  Email:     Siamak.Layeghy@uq.net.au
 *  Date:      08-11-2017
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

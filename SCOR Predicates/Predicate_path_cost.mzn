@@ -2,7 +2,7 @@
 *  File:      SCOR Predicate for link utilization
 *  Objective: Finds the total (additive) costs of given paths of flows
 *  Github:    https://github.com/layeghy/SCOR
-*  Author:    Siamak Layeghy, Marius Portmann
+*  Author:    Siamak Layeghy
 *  Email:     Siamak.Layeghy@uq.net.au
 *  Date:      08-11-2017
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/

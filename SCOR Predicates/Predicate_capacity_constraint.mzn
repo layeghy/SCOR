@@ -2,7 +2,7 @@
 *  File:      SCOR Predicate for capacity constraint
 *  Objective: applied the capacity constraint, i.e. limits the flows in each link to be less than its capacity
 *  Github:    https://github.com/layeghy/SCOR
-*  Author:    Siamak Layeghy, Marius Portmann
+*  Author:    Siamak Layeghy
 *  Email:     Siamak.Layeghy@uq.net.au
 *  Date:      08-11-2017
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/

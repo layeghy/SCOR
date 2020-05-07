@@ -2,7 +2,7 @@
 *  File:      SCOR Model for Constrained residual capacity least cost path
 *  Objective: Finds the flow paths that has a specified residual capacity with least cost
 *  Github:    https://github.com/layeghy/SCOR
-*  Author:    Siamak Layeghy, Marius Portmann
+*  Author:    Siamak Layeghy
 *  Email:     Siamak.Layeghy@uq.net.au
 *  Date:      08-11-2017
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -3,7 +3,7 @@
 *  Objective: Finds the flow path with minimum cost. Based on the definition of cost, it can be used for the modelling of
  "least cost path", "Shortest Path", "minimum loss path", and " minimum static delay path" routing algorithms.
 *  Github:    https://github.com/layeghy/SCOR
-*  Author:    Siamak Layeghy, Marius Portmann
+*  Author:    Siamak Layeghy
 *  Email:     Siamak.Layeghy@uq.net.au
 *  Date:      08-11-201
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
